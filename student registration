@@ -1,0 +1,67 @@
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
+
+class Student {
+    private final String name;
+    private int id;
+    private final int age;
+    private final String gender;
+    private final String eMail;
+    public Student(String name, int id,int age,String gender,String eMail) {
+        this.name = name;
+        this.id=id;
+        this.age = age;
+        this.gender=gender;
+        this.eMail=eMail;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + ",ID:" + id +" Age: " + age + " , Email:" + eMail
+                +",Gender:" + gender;
+    }
+}
+
+public class StudentRegistration {
+    public static void main(String[] args) {
+        List<Student> students = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            try {
+                System.out.print("Enter student name (or 'quit' to exit): ");
+                String name = scanner.nextLine();
+
+                if (name.equalsIgnoreCase("quit")) {
+                    break;
+                }
+                System.out.print("Enter student id: ");
+                int id = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.print("Enter student age: ");
+                int age = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Enter student gender: ");
+                String gender = scanner.nextLine();
+                scanner.nextLine();
+                System.out.print("Enter student Email: ");
+                String eMail = scanner.nextLine();
+                scanner.nextLine();
+
+                Student student = new Student(name,id, age,gender, eMail);
+                students.add(student);
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please try again.");
+                scanner.nextLine();
+            }
+        }
+
+        System.out.println("\nStudent Registration Details:");
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+}
